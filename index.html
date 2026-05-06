@@ -24,6 +24,8 @@
   --cream:#F0EAD6;
   --muted:#B0AA9A;
   --deep:#080808;
+  --ease-out:cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:cubic-bezier(0.8, 0, 0.2, 1);
 }
 html{scroll-behavior:auto}
 body{
@@ -60,8 +62,14 @@ nav.scrolled{
   color:var(--cream);font-size:.85rem;letter-spacing:.08em;text-decoration:none;
   font-family:'DM Sans',sans-serif;font-weight:400;opacity:.8;
   transition:opacity 0.2s ease,color 0.2s ease;
+  position:relative;
+}
+.nav-links a::after{
+  content:"";position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--gold);transition:width 0.3s var(--ease-out);
 }
 .nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a:hover::after{width:100%}
 .nav-links a:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
 
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -123,9 +131,16 @@ section{position:relative}
   letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
   padding:.85rem 2.2rem;border-radius:3px;border:none;cursor:pointer;
   box-shadow:0 4px 24px rgba(201,168,76,.22),0 1px 4px rgba(201,168,76,.12);
-  transition:transform 0.2s ease,box-shadow 0.2s ease;
+  transition:transform 0.2s ease,box-shadow 0.2s ease,opacity 0.2s ease;
+  position:relative;overflow:hidden;
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,.35)}
+.btn-primary::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transform:translateX(-100%);transition:none;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(201,168,76,.4)}
+.btn-primary:hover::before{animation:shimmer 0.6s ease-in-out}
 .btn-primary:active{transform:translateY(0)}
 .btn-primary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .btn-ghost{
@@ -143,6 +158,11 @@ section{position:relative}
 }
 .scroll-chevron svg{width:20px;height:20px;stroke:var(--gold);opacity:.6;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 @keyframes chevronBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes fadeInUpSlow{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-1000px 0}100%{background-position:1000px 0}}
+@keyframes countUp{from{opacity:0}to{opacity:1}}
+@keyframes parallaxBg{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 .section-pad{padding:5rem 2rem}
 .container{max-width:1140px;margin:0 auto}
@@ -155,7 +175,7 @@ section{position:relative}
   color:var(--cream);line-height:1.2;
 }
 
-#o-nas{background:var(--bg)}
+#o-nas{background:linear-gradient(135deg, rgba(13,13,13,1) 0%, rgba(20,20,20,.8) 40%, rgba(13,13,13,1) 100%)}
 .about-top{
   display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;
   margin-bottom:4rem;
@@ -165,6 +185,7 @@ section{position:relative}
   font-size:clamp(7rem,14vw,11rem);
   font-style:italic;font-weight:300;line-height:1;color:var(--gold);
   text-shadow:0 0 60px rgba(201,168,76,.2);
+  will-change:transform;
 }
 .big-number-label{font-size:.9rem;color:var(--muted);margin-top:.5rem;max-width:200px;line-height:1.5}
 .about-right .section-h2{margin-bottom:1rem}
@@ -194,19 +215,20 @@ section{position:relative}
 }
 .process-desc{font-size:.88rem;color:var(--muted)}
 
-#uslugi{background:var(--bg)}
+#uslugi{background:var(--bg);position:relative}
+#uslugi::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 0%, rgba(201,168,76,.04) 0%, transparent 70%);pointer-events:none}
 .services-header{text-align:center;margin-bottom:3rem}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
 .service-card{
   background:var(--surface);
   border-left:2px solid transparent;
-  transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+  transition:transform 0.3s var(--ease-out),border-color 0.3s ease,box-shadow 0.3s ease;
   overflow:hidden;
 }
 .service-card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-6px);
   border-left-color:var(--gold);
-  box-shadow:0 8px 40px rgba(201,168,76,.12),-2px 0 0 var(--gold);
+  box-shadow:0 12px 48px rgba(201,168,76,.16),-2px 0 0 var(--gold);
 }
 .service-img{width:100%;height:280px;object-fit:cover;display:block}
 .service-placeholder,.grid-placeholder{
@@ -295,7 +317,10 @@ section{position:relative}
   height:100%;
   object-fit:cover;
   display:block;
-  transform:scale(1.01);
+  transition:transform 0.4s ease;
+}
+.carousel-slide:hover img{
+  transform:scale(1.05);
 }
 .carousel-slide::after{
   content:"";
@@ -364,7 +389,7 @@ section{position:relative}
 }
 .realizacje-ig a:hover{border-bottom-color:var(--gold)}
 
-#jak-pracujemy{background:var(--bg);padding:5rem 2rem}
+#jak-pracujemy{background:linear-gradient(180deg, rgba(8,8,8,.5) 0%, rgba(20,20,20,.3) 50%, rgba(8,8,8,.5) 100%);padding:5rem 2rem}
 .timeline-wrap{max-width:1140px;margin:0 auto}
 .timeline-h2{text-align:center;margin-bottom:4rem}
 .timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;align-items:start}
@@ -388,7 +413,7 @@ section{position:relative}
 .step-title{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--cream);margin-bottom:.5rem}
 .step-desc{font-size:.82rem;color:var(--muted);line-height:1.6;max-width:180px;margin:0 auto}
 
-#kontakt{background:var(--surface);padding:5rem 2rem}
+#kontakt{background:linear-gradient(135deg, rgba(20,20,20,1) 0%, rgba(13,13,13,.9) 50%, rgba(8,8,8,1) 100%);padding:5rem 2rem}
 .kontakt-wrap{max-width:1000px;margin:0 auto}
 .kontakt-header{text-align:center;margin-bottom:3.5rem}
 .kontakt-subtitle{color:var(--muted);font-size:.95rem;margin-top:.5rem}
@@ -450,7 +475,7 @@ section{position:relative}
 .btn-ig:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 footer{
-  background:var(--deep);padding:3rem 2rem;text-align:center;
+  background:linear-gradient(180deg, rgba(13,13,13,1) 0%, rgba(8,8,8,1) 100%);padding:3rem 2rem;text-align:center;
   border-top:1px solid rgba(201,168,76,.08);
 }
 .footer-logo img{height:48px;object-fit:contain;margin:0 auto 1rem;display:block}
@@ -467,10 +492,13 @@ footer{
 .reveal{opacity:0;transform:translateY(40px)}
 
 @media(max-width:768px){
+  body{overflow-x:hidden}
   nav{padding:1rem 1.25rem}
   nav.scrolled{padding:.75rem 1.25rem}
   .nav-links{display:none}
   .hamburger{display:flex}
+  .hero-h1{font-size:clamp(2rem,5.5vw,3.5rem);margin-bottom:1rem}
+  .hero-content{padding:0 1rem}
   .about-top{grid-template-columns:1fr;gap:1.5rem}
   .about-right p{max-width:100%}
   .founders{grid-template-columns:1fr;gap:1.25rem}
@@ -494,6 +522,8 @@ footer{
   .kontakt-cols{grid-template-columns:1fr;gap:2.5rem}
   .section-pad{padding:3.5rem 1.25rem}
   #jak-pracujemy{padding:3.5rem 1.25rem}
+  .btn-primary{width:100%;padding:1rem}
+  .btn-submit{width:100%;padding:1rem}
 }
 </style>
 </head>
@@ -888,6 +918,37 @@ if(carouselTrack){
   renderSlide(0)
   startAutoplay()
 }
+
+const bigNumberEl=document.querySelector('.big-number')
+if(bigNumberEl){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const duration=2000
+        const start=Date.now()
+        const animate=()=>{
+          const now=Date.now()-start
+          const progress=Math.min(now/duration,1)
+          const value=Math.round(20*progress)
+          bigNumberEl.textContent=value
+          if(progress<1)requestAnimationFrame(animate)
+        }
+        animate()
+        observer.unobserve(entry.target)
+      }
+    })
+  },{threshold:.5})
+  observer.observe(bigNumberEl.closest('.reveal'))
+}
+
+window.addEventListener('scroll',()=>{
+  const hero=document.getElementById('hero')
+  if(hero){
+    const rect=hero.getBoundingClientRect()
+    const offset=window.scrollY*0.5
+    hero.style.transform=`translateY(${offset}px)`
+  }
+},{passive:true})
 
 document.getElementById('btnSubmit').addEventListener('click',()=>{
   const name = document.getElementById('fieldName').value.trim()
