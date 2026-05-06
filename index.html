@@ -73,7 +73,7 @@ nav.scrolled{
 .nav-links a:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
 
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{display:block;width:24px;height:1.5px;background:var(--cream);transition:transform 0.3s ease,opacity 0.3s ease}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--cream);transition:transform 0.4s var(--ease-out),opacity 0.4s var(--ease-out)}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
@@ -101,6 +101,7 @@ section{position:relative}
 .hero-bg{
   position:absolute;inset:0;
   animation:breathe 6s ease-in-out infinite alternate;
+  background:radial-gradient(ellipse 60% 55% at 50% 50%, rgba(38,28,8,.6) 0%, rgba(8,8,8,.2) 50%, #0D0D0D 100%);
 }
 @keyframes breathe{
   0%{background:radial-gradient(ellipse 55% 50% at 50% 60%, #1e1508 0%, #0D0D0D 72%)}
@@ -184,7 +185,7 @@ section{position:relative}
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(7rem,14vw,11rem);
   font-style:italic;font-weight:300;line-height:1;color:var(--gold);
-  text-shadow:0 0 60px rgba(201,168,76,.2);
+  text-shadow:0 0 40px rgba(201,168,76,.15),0 0 80px rgba(201,168,76,.08);
   will-change:transform;
 }
 .big-number-label{font-size:.9rem;color:var(--muted);margin-top:.5rem;max-width:200px;line-height:1.5}
@@ -490,6 +491,18 @@ footer{
 .footer-copy{font-size:.75rem;color:#444}
 
 .reveal{opacity:0;transform:translateY(40px)}
+.service-card:nth-child(1){--delay:0ms}
+.service-card:nth-child(2){--delay:120ms}
+.service-card:nth-child(3){--delay:240ms}
+.founder-card:nth-child(1){--delay:0ms}
+.founder-card:nth-child(2){--delay:150ms}
+.process-card:nth-child(1){--delay:0ms}
+.process-card:nth-child(2){--delay:120ms}
+.process-card:nth-child(3){--delay:240ms}
+.timeline-step:nth-child(2){--delay:0ms}
+.timeline-step:nth-child(3){--delay:100ms}
+.timeline-step:nth-child(4){--delay:200ms}
+.timeline-step:nth-child(5){--delay:300ms}
 
 @media(max-width:768px){
   body{overflow-x:hidden}
@@ -497,17 +510,20 @@ footer{
   nav.scrolled{padding:.75rem 1.25rem}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .hero-h1{font-size:clamp(2rem,5.5vw,3.5rem);margin-bottom:1rem}
+  .hero-h1{font-size:clamp(2rem,5.5vw,3.5rem);margin-bottom:1rem;letter-spacing:-.02em}
   .hero-content{padding:0 1rem}
+  .hero-body{font-size:.95rem;margin:0 auto 1.5rem}
+  .hero-cta-wrap{gap:.75rem}
   .about-top{grid-template-columns:1fr;gap:1.5rem}
-  .about-right p{max-width:100%}
+  .about-right p{max-width:100%;font-size:.9rem}
+  .big-number{font-size:clamp(5rem,12vw,8rem)}
   .founders{grid-template-columns:1fr;gap:1.25rem}
   .process-cards{grid-template-columns:1fr}
   .services-grid{
     display:flex;overflow-x:auto;gap:1rem;padding-bottom:1rem;
     scroll-snap-type:x mandatory;
   }
-  .service-card{flex:0 0 80vw;scroll-snap-align:start}
+  .service-card{flex:0 0 85vw;scroll-snap-align:start}
   .realizacje-carousel{padding:0 1.25rem}
   .carousel-shell{border-radius:20px}
   .carousel-slide{aspect-ratio:4/5}
@@ -522,8 +538,7 @@ footer{
   .kontakt-cols{grid-template-columns:1fr;gap:2.5rem}
   .section-pad{padding:3.5rem 1.25rem}
   #jak-pracujemy{padding:3.5rem 1.25rem}
-  .btn-primary{width:100%;padding:1rem}
-  .btn-submit{width:100%;padding:1rem}
+  .btn-primary,.btn-submit{width:100%;padding:1rem 1.5rem}
 }
 </style>
 </head>
