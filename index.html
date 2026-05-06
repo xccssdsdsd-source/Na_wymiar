@@ -209,11 +209,47 @@ section{position:relative}
   box-shadow:0 8px 40px rgba(201,168,76,.12),-2px 0 0 var(--gold);
 }
 .service-img{width:100%;height:280px;object-fit:cover;display:block}
-.service-placeholder{
-  width:100%;height:280px;background:#1A1A1A;
-  border:1px dashed var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-family:monospace;color:var(--gold);font-size:13px;
+.service-placeholder,.grid-placeholder{
+  background:#e8e4de;
+  border-radius:inherit;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.service-placeholder{width:100%;height:280px}
+.placeholder-card-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-align:center;
+}
+.placeholder-card-icon{
+  width:38px;
+  height:38px;
+  border:1px solid #c8c0b5;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#9f988e;
+}
+.placeholder-card-icon svg{
+  width:18px;
+  height:18px;
+  display:block;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.placeholder-card-label{
+  font-size:13px;
+  color:#aaa;
+  font-family:inherit;
+  line-height:1.2;
 }
 .service-body{padding:1.5rem}
 .service-title{
@@ -241,12 +277,7 @@ section{position:relative}
 .grid-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
 .grid-cell:hover img{transform:scale(1.04)}
 .grid-cell:hover{box-shadow:0 0 0 1px var(--gold),0 8px 40px rgba(201,168,76,.15)}
-.grid-placeholder{
-  width:100%;height:100%;background:#1A1A1A;
-  border:1px dashed var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-family:monospace;color:var(--gold);font-size:13px;
-}
+.grid-placeholder{width:100%;height:100%}
 .realizacje-ig{text-align:center;margin-top:2.5rem;padding:0 2rem}
 .realizacje-ig a{
   color:var(--gold);font-size:.9rem;letter-spacing:.06em;text-decoration:none;
@@ -497,14 +528,34 @@ footer{
         </div>
       </div>
       <div class="service-card reveal">
-        <div class="service-placeholder">[ZDJĘCIE_SZAFY]</div>
+        <div class="service-placeholder">
+          <div class="placeholder-card-content">
+            <div class="placeholder-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"></path>
+                <circle cx="12" cy="13" r="3.25"></circle>
+              </svg>
+            </div>
+            <span class="placeholder-card-label">Zdj&#281;cie wkr&#243;tce</span>
+          </div>
+        </div>
         <div class="service-body">
           <div class="service-title">Szafy na wymiar</div>
           <p class="service-desc"><span class="placeholder-text">[OPIS_SZAFY]</span></p>
         </div>
       </div>
       <div class="service-card reveal">
-        <div class="service-placeholder">[ZDJĘCIE_ZABUDOWY]</div>
+        <div class="service-placeholder">
+          <div class="placeholder-card-content">
+            <div class="placeholder-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"></path>
+                <circle cx="12" cy="13" r="3.25"></circle>
+              </svg>
+            </div>
+            <span class="placeholder-card-label">Zdj&#281;cie wkr&#243;tce</span>
+          </div>
+        </div>
         <div class="service-body">
           <div class="service-title">Zabudowy na wymiar</div>
           <p class="service-desc"><span class="placeholder-text">[OPIS_ZABUDOWY]</span></p>
@@ -523,9 +574,45 @@ footer{
     <div class="grid-cell reveal"><img src="./ImageDownloader_www.instagram.com_653923339_18059942810446093_6458387390776997875_n.jpg" alt="Realizacja 1"></div>
     <div class="grid-cell reveal"><img src="./ImageDownloader_www.instagram.com_654865999_18059942819446093_7886431109964046347_n.jpg" alt="Realizacja 2"></div>
     <div class="grid-cell reveal"><img src="./ImageDownloader_www.instagram.com_656697798_18062704613446093_5439178762969931750_n.jpg" alt="Realizacja 3"></div>
-    <div class="grid-cell reveal"><div class="grid-placeholder">[ZDJĘCIE_REALIZACJI_4]</div></div>
-    <div class="grid-cell reveal"><div class="grid-placeholder">[ZDJĘCIE_REALIZACJI_5]</div></div>
-    <div class="grid-cell reveal"><div class="grid-placeholder">[ZDJĘCIE_REALIZACJI_6]</div></div>
+    <div class="grid-cell reveal">
+      <div class="grid-placeholder">
+        <div class="placeholder-card-content">
+          <div class="placeholder-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"></path>
+              <circle cx="12" cy="13" r="3.25"></circle>
+            </svg>
+          </div>
+          <span class="placeholder-card-label">Zdj&#281;cie wkr&#243;tce</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid-cell reveal">
+      <div class="grid-placeholder">
+        <div class="placeholder-card-content">
+          <div class="placeholder-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"></path>
+              <circle cx="12" cy="13" r="3.25"></circle>
+            </svg>
+          </div>
+          <span class="placeholder-card-label">Zdj&#281;cie wkr&#243;tce</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid-cell reveal">
+      <div class="grid-placeholder">
+        <div class="placeholder-card-content">
+          <div class="placeholder-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"></path>
+              <circle cx="12" cy="13" r="3.25"></circle>
+            </svg>
+          </div>
+          <span class="placeholder-card-label">Zdj&#281;cie wkr&#243;tce</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="realizacje-ig">
     <a href="https://www.instagram.com/wymiarowane/" target="_blank" rel="noopener">Zobacz więcej realizacji na Instagramie →</a>
